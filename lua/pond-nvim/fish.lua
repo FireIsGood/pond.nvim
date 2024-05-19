@@ -104,7 +104,7 @@ function M.random_fish(rarity)
   for key in pairs(fish_in_rarity) do
     table.insert(keyset, key)
   end
-  return keyset[math.random(#fish_in_rarity)]
+  return keyset[math.random(#keyset)]
 end
 
 --------------------------------------------------------------------------------
