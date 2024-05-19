@@ -39,7 +39,7 @@ The `.setup()` call is optional if you are fine with the defaults below.
 -- default config
 require("pond-nvim").setup({
   name = "Unnamed Fisher",
-  useDefaultKeymaps = true,
+  use_default_keymaps = true,
 })
 ```
 

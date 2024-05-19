@@ -10,8 +10,8 @@ function M.balance()
   require("pond-nvim.fish").balance()
 end
 
-function M.resetAccount()
-  require("pond-nvim.fish").resetAccount()
+function M.reset_account()
+  require("pond-nvim.fish").reset_account()
 end
 
 --------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ function M.setup(userConfig)
   require("pond-nvim.state").setup()
 
   -- Configure keymaps
-  if config.useDefaultKeymaps then
+  if config.use_default_keymaps then
     require("pond-nvim.keymaps").setup()
   end
 end

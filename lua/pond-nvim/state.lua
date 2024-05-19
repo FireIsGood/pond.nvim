@@ -1,6 +1,6 @@
 local M = {}
 
-local util = require("pond-nvim.util")
+local json = require("pond-nvim.json")
 
 --------------------------------------------------------------------------------
 
@@ -8,60 +8,24 @@ local util = require("pond-nvim.util")
 ---@field money number
 
 ---@type data
-M.defaultData = {
+M.default_data = {
   money = 100,
 }
 
 function M.setup()
   -- Load existing data or use default
-  M.data = M.loadData() or M.defaultData
-  M.saveData()
+  M.data = json.read_json(M.data_path()) or M.default_data
+  json.write_json(M.data, M.data_path())
 end
 
-function M.saveData()
-  -- Open the file
-  local file = io.open(M.dataPath(), "w+")
-  if not file then
-    util.notify("Could not open file", "error")
-    return
-  end
-
-  -- Write our data
-  local encodedData = vim.fn.json_encode(M.data)
-  file:write(encodedData)
-
-  -- Close the file
-  io.close(file)
-end
-
----@return data?
-function M.loadData()
-  -- Open the file
-  local file = io.open(M.dataPath(), "r")
-  if not file then
-    util.notify("No previous data, creating account!")
-    return nil
-  end
-
-  -- Read our data
-  ---@type string
-  local encodedData = file:read("*a")
-
-  local data = nil
-  if encodedData ~= "" then
-    data = vim.fn.json_decode(encodedData)
-  end
-
-  -- Close the file
-  io.close(file)
-
-  return data
+function M.save_data()
+  json.write_json(M.data, M.data_path())
 end
 
 --------------------------------------------------------------------------------
 
-function M.dataPath()
-  return vim.fn.stdpath("data") .. "/pond-data.json"
+function M.data_path()
+  return vim.fs.normalize(vim.fn.stdpath("data") .. "/pond-data.json")
 end
 
 --------------------------------------------------------------------------------
