@@ -27,7 +27,7 @@ Use the commands or the builtin keymaps.
 | ------------------- | ------------ | ------------------ |
 | `:Fish`             | `<leader>af` | Fish               |
 | `:FishBalance`      | `<leader>ab` | Check your balance |
-| `:FishResetAccount` |              | Check your balance |
+| `:FishResetAccount` |              | Reset your account |
 
 ## Configuration
 
