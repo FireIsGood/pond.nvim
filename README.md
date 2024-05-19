@@ -4,7 +4,7 @@ Fishing mini game. Wildly unbalanced.
 
 ## Installation
 
-> [!WARNING] What?
+> [!WARNING]
 > Why though?
 
 ```lua
