@@ -37,7 +37,7 @@ The `.setup()` call is optional if you are fine with the defaults below.
 
 ```lua
 -- default config
-require("pond.nvim").setup({
+require("pond-nvim").setup({
   name = "Unnamed Fisher",
   useDefaultKeymaps = true,
 })
