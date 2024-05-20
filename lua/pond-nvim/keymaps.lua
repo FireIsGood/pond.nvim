@@ -1,5 +1,7 @@
 local M = {}
 
+local config = require("pond-nvim.config").config
+
 local cmd = vim.api.nvim_create_user_command
 
 --------------------------------------------------------------------------------
@@ -18,12 +20,16 @@ local default_keymaps = {
 function M.setup()
   local keymap = vim.keymap.set
 
-  for command, map in pairs(default_keymaps) do
-    keymap("n", map, function()
-      require("pond-nvim")[command]()
-    end, { desc = command .. " command" })
+  -- Keymaps
+  if config.use_default_keymaps then
+    for command, map in pairs(default_keymaps) do
+      keymap("n", map, function()
+        require("pond-nvim")[command]()
+      end, { desc = command .. " command" })
+    end
   end
 
+  -- Commands
   for command, map in pairs(default_commands) do
     cmd(map, function()
       require("pond-nvim")[command]()

@@ -1,6 +1,8 @@
 local M = {}
 
-local json = require("pond-nvim.json")
+local Json = require("pond-nvim.json")
+local config = require("pond-nvim.config").config
+local data_path = vim.fs.normalize(config.data_path)
 
 --------------------------------------------------------------------------------
 
@@ -14,18 +16,13 @@ M.default_data = {
 
 function M.setup()
   -- Load existing data or use default
-  M.data = json.read_json(M.data_path()) or M.default_data
-  json.write_json(M.data, M.data_path())
+
+  M.data = Json.read_json(data_path) or M.default_data
+  Json.write_json(M.data, data_path)
 end
 
 function M.save_data()
-  json.write_json(M.data, M.data_path())
-end
-
---------------------------------------------------------------------------------
-
-function M.data_path()
-  return vim.fs.normalize(vim.fn.stdpath("data") .. "/pond-data.json")
+  Json.write_json(M.data, data_path)
 end
 
 --------------------------------------------------------------------------------

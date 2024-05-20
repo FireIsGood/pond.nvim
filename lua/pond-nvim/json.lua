@@ -9,7 +9,7 @@ local util = require("pond-nvim.util")
 ---@param path string
 function M.write_json(table, path)
   -- Encode our data
-  local data = vim.fn.json_encode(table)
+  local data = vim.json.encode(table)
 
   -- Open the file
   local file, err = io.open(path, "w+")
@@ -37,7 +37,7 @@ function M.read_json(path)
   local encoded_data = file:read("*a")
   file:close()
 
-  return vim.fn.json_decode(encoded_data)
+  return vim.json.decode(encoded_data)
 end
 
 --------------------------------------------------------------------------------

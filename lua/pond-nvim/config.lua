@@ -6,12 +6,14 @@ local M = {}
 local default_config = {
   name = "Unnamed Fisher",
   use_default_keymaps = true,
+  data_path = vim.fn.stdpath("data") .. "/pond-data.json",
 }
 M.config = default_config
 
 ---@class config
 ---@field name? string
 ---@field use_default_keymaps? boolean
+---@field data_path? string
 
 ---optional setup function
 ---@param user_config? config

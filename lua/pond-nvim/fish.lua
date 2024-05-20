@@ -1,9 +1,9 @@
 local M = {}
 
-local util = require("pond-nvim.util")
+local Util = require("pond-nvim.util")
 local config = require("pond-nvim.config").config
-local state = require("pond-nvim.state")
-local data = state.data
+local State = require("pond-nvim.state")
+local data = State.data
 
 --------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ local fish_list = {
 
 function M.fish()
   if data.money < 10 then
-    util.notify("You don't have enough money to fish!", "warn")
+    Util.notify("You don't have enough money to fish!", "warn")
     return
   end
 
@@ -53,11 +53,11 @@ function M.fish()
     .. "\n"
     .. "You paid 💴 10 for fishing. (💴 " .. data.money .." left)"
 
-  util.notify(output_text)
+  Util.notify(output_text)
 end
 
 function M.balance()
-  util.notify("Balance: 💴 " .. tostring(data.money))
+  Util.notify("Balance: 💴 " .. tostring(data.money))
 end
 
 --------------------------------------------------------------------------------
@@ -67,12 +67,12 @@ end
 ---@param change number
 function M.change_money(change)
   data.money = data.money + change
-  state.save_data()
+  State.save_data()
 end
 
 function M.reset_account()
   data.money = require("pond-nvim.state").default_data.money
-  state.save_data()
+  State.save_data()
 end
 
 --------------------------------------------------------------------------------

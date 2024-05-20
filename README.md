@@ -31,8 +31,6 @@ Use the commands or the builtin keymaps.
 
 ## Configuration
 
-### Defaults
-
 The `.setup()` call is optional if you are fine with the defaults below.
 
 ```lua
@@ -40,7 +38,29 @@ The `.setup()` call is optional if you are fine with the defaults below.
 require("pond-nvim").setup({
   name = "Unnamed Fisher",
   use_default_keymaps = true,
+  data_path = vim.fn.stdpath("data") .. "/pond-data.json",
 })
+```
+
+Example configuration:
+
+```lua
+-- lazy.nvim
+{
+  "FireIsGood/pond.nvim",
+  lazy = false,
+  opts = { use_default_keymaps = false }
+},
+
+-- packer
+use {
+  "FireIsGood/pond.nvim"
+	config = function ()
+		require("pont-nvim").setup({
+      use_default_keymaps = true
+    })
+	end,
+}
 ```
 
 ## Contributing
