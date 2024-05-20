@@ -42,6 +42,8 @@ require("pond-nvim").setup({
 })
 ```
 
+The `data_path` variable is expanded, so you can use `~` as short for your home directory.
+
 Example configuration:
 
 ```lua
@@ -49,17 +51,23 @@ Example configuration:
 {
   "FireIsGood/pond.nvim",
   lazy = false,
-  opts = { use_default_keymaps = false }
+  opts = {
+    name = "The Coolest Fisher"
+    use_default_keymaps = false,
+    data_path = "~/Desktop/my_cool_fishery_data.json",
+  }
 },
 
 -- packer
 use {
   "FireIsGood/pond.nvim"
-	config = function ()
-		require("pont-nvim").setup({
-      use_default_keymaps = true
+  config = function ()
+    require("pont-nvim").setup({
+      name = "The Coolest Fisher",
+      use_default_keymaps = true,
+      data_path = "~/Desktop/my_cool_fishery_data.json",
     })
-	end,
+  end,
 }
 ```
 
