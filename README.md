@@ -2,10 +2,10 @@
 
 Fishing mini game. Wildly unbalanced.
 
-## Installation
-
 > [!WARNING]
 > Why though?
+
+## Installation
 
 ```lua
 -- lazy.nvim
