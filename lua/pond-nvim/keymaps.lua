@@ -6,34 +6,40 @@ local cmd = vim.api.nvim_create_user_command
 
 --------------------------------------------------------------------------------
 
-local default_commands = {
-  fish = "Fish",
-  balance = "FishBalance",
-  reset_account = "FishResetAccount",
-}
+---@class fish_command
+---@field fish_function string
+---@field description string
+---@field user_command string
+---@field keymap string?
 
-local default_keymaps = {
-  fish = "<leader>af",
-  balance = "<leader>ab",
+---@type fish_command[]
+local fish_command_list = {
+  { fish_function = "fish", description = "Fish once", user_command = "Fish", keymap = "<leader>af" },
+  {
+    fish_function = "balance",
+    description = "Check your balance",
+    user_command = "FishBalance",
+    keymap = "<leader>ab",
+  },
+  { fish_function = "reset_account", description = "Reset your account", user_command = "FishResetAccount" },
 }
 
 function M.setup()
   local keymap = vim.keymap.set
 
-  -- Keymaps
-  if config.use_default_keymaps then
-    for command, map in pairs(default_keymaps) do
-      keymap("n", map, function()
-        require("pond-nvim")[command]()
-      end, { desc = command .. " command" })
+  -- Keymaps and commands
+  for _, command in pairs(fish_command_list) do
+    -- Keymap
+    if config.use_default_keymaps and command.keymap ~= nil then
+      keymap("n", command.keymap, function()
+        require("pond-nvim")[command.fish_function]()
+      end, { desc = command.description })
     end
-  end
 
-  -- Commands
-  for command, map in pairs(default_commands) do
-    cmd(map, function()
-      require("pond-nvim")[command]()
-    end, { desc = command .. " command" })
+    -- Command
+    cmd(command.user_command, function()
+      require("pond-nvim")[command.fish_function]()
+    end, { desc = command.description })
   end
 end
 
