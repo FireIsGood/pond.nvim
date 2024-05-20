@@ -36,8 +36,16 @@ The `.setup()` call is optional if you are fine with the defaults below.
 ```lua
 -- default config
 require("pond-nvim").setup({
+  -- Name of your fisher (cosmetic)
   name = "Unnamed Fisher",
+
+  -- Cooldown for fishing in seconds
+  cooldown = 5,
+
+  -- Use the default keymaps (<leader>af, etc.)
   use_default_keymaps = true,
+
+  -- Save data location
   data_path = vim.fn.stdpath("data") .. "/pond-data.json",
 })
 ```
@@ -53,6 +61,7 @@ Example configuration:
   lazy = false,
   opts = {
     name = "The Coolest Fisher"
+    cooldown = 0,
     use_default_keymaps = false,
     data_path = "~/Desktop/my_cool_fishery_data.json",
   }
@@ -64,6 +73,7 @@ use {
   config = function ()
     require("pont-nvim").setup({
       name = "The Coolest Fisher",
+      cooldown = 0,
       use_default_keymaps = true,
       data_path = "~/Desktop/my_cool_fishery_data.json",
     })
