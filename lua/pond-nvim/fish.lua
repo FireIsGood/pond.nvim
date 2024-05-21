@@ -39,8 +39,6 @@ local fish_list = {
 
 function M.fish()
   if not can_fish then
-    local time_passed = vim.loop.now() - timer_started_ms
-    local cooldown_left = config.cooldown - math.floor(time_passed / 1000)
     Util.notify(
       config.name .. ", you cannot fish yet!\n\nYou can fish again in " .. cooldown_left .. " seconds",
       "warn"
@@ -142,6 +140,12 @@ function M.start_cooldown()
   timer_id = vim.fn.timer_start(cooldown_ms, function()
     can_fish = true
   end)
+end
+
+function M.get_time_left()
+  local time_passed = vim.loop.now() - timer_started_ms
+  local cooldown_left = config.cooldown - math.floor(time_passed / 1000)
+  return cooldown_left
 end
 
 --------------------------------------------------------------------------------
