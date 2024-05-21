@@ -25,7 +25,7 @@ function M.setup(userConfig)
   math.randomseed(os.clock())
 
   -- Load config
-  local config = require("pond-nvim.config").setup(userConfig)
+  require("pond-nvim.config").setup(userConfig)
 
   -- Setup state
   require("pond-nvim.state").setup()
