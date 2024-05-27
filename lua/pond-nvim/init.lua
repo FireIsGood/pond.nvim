@@ -31,7 +31,7 @@ function M.setup(userConfig)
   require("pond-nvim.state").setup()
 
   -- Configure keymaps
-  require("pond-nvim.keymaps").setup()
+  require("pond-nvim.keymaps").setup_keymaps()
 end
 
 --------------------------------------------------------------------------------

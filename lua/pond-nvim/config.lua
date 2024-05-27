@@ -22,9 +22,6 @@ M.config = default_config
 function M.setup(user_config)
   M.config = vim.tbl_deep_extend("force", default_config, user_config or {})
 
-  if M.config.use_default_keymaps then
-    require("pond-nvim.keymaps").setup()
-  end
   return M.config
 end
 

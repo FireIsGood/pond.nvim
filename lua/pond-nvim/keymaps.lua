@@ -3,6 +3,7 @@ local M = {}
 local config = require("pond-nvim.config").config
 
 local cmd = vim.api.nvim_create_user_command
+local keymap = vim.keymap.set
 
 --------------------------------------------------------------------------------
 
@@ -24,19 +25,24 @@ local fish_command_list = {
   { fish_function = "reset_account", description = "Reset your account", user_command = "FishResetAccount" },
 }
 
-function M.setup()
-  local keymap = vim.keymap.set
+function M.setup_keymaps()
+  if not config.use_default_keymaps then
+    return
+  end
 
   -- Keymaps and commands
   for _, command in pairs(fish_command_list) do
     -- Keymap
-    if config.use_default_keymaps and command.keymap ~= nil then
+    if command.keymap ~= nil then
       keymap("n", command.keymap, function()
         require("pond-nvim")[command.fish_function]()
       end, { desc = command.description })
     end
+  end
+end
 
-    -- Command
+function M.setup_user_commands()
+  for _, command in pairs(fish_command_list) do
     cmd(command.user_command, function()
       require("pond-nvim")[command.fish_function]()
     end, { desc = command.description })
